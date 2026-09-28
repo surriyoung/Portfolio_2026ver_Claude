@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PROJECTS | 최수영</title>
+<meta name="description" content="웹 퍼블리셔 &amp; 프론트엔드 개발자 최수영의 포트폴리오">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/project.css">
+</head>
+<body data-root="../">
+<!-- [SECTION:site-header] 페이지 이동형 헤더 (모든 HTML 에 동일하게 복사) -->
+<header id="site-header" class="site-header" data-section="site-header">
+  <div class="page">
+    <a href="../index.html" class="site-header__logo">SURRIYOUNG</a>
+    <nav class="site-header__nav" aria-label="상단 메뉴">
+      <a href="../index.html">HOME</a>
+      <a href="../project/list.html" aria-current="page">PROJECTS</a>
+    </nav>
+  </div>
+</header>
+<!-- [PAGE:project-list] data/projects.json → js/project.js 가 렌더링 (?cat=publishing|app) -->
+<main class="page plist" id="project-list">
+  <div class="plist__head">
+    <h1>PROJECTS</h1>
+    <nav class="plist__filter" aria-label="프로젝트 필터"></nav>
+  </div>
+  <ul class="plist__grid"></ul>
+</main>
+
+<aside id="resume-toast" class="resume-toast" data-section="resume-toast" aria-label="이력서 바로가기" aria-hidden="true">
+  <div class="ph resume-toast__avatar" data-asset="../assets/sprites/character-suit.png">정장 캐릭터</div>
+  <div><p class="resume-toast__copy">귀사의 발전은<br>저의 발전입니다.</p>
+  <a class="resume-toast__link" href="assets/resume/choisuyoung-resume.pdf" download="최수영_이력서.pdf">이력서 다운로드 ⬇</a></div>
+  <button type="button" class="resume-toast__close" aria-label="닫기">✕</button>
+</aside>
+
+<!-- [SECTION:site-footer] -->
+<footer id="site-footer" class="site-footer" data-section="site-footer">
+  <div class="page"><small>© 2026 SURRIYOUNG. All rights reserved.</small></div>
+</footer>
+
+<script src="../js/common.js" defer></script>
+<script src="../js/project.js" defer></script>
+</body>
+</html>

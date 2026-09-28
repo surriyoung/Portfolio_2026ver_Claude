@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>최수영 | 포트폴리오</title>
+<meta name="description" content="웹 퍼블리셔 &amp; 프론트엔드 개발자 최수영의 포트폴리오">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-root="">
+<!--
+=====================================================================
+ SECTION MAP  (수정할 때는 아래 고유 이름으로 찾으세요)
+ - 검색어: "[SECTION:이름]"  /  id="이름"  /  data-section="이름"
+ - 클래스 규칙: 섹션이름__요소 (BEM). 예) hero__bubbles, history__item
+---------------------------------------------------------------------
+ site-header      상단 로고 + HOME / PROJECTS (inc/header.php, 페이지 이동)
+ sec-hero         말풍선 인사 + 책상 앞 픽셀 캐릭터
+   sec-menubar      메뉴바 (sticky) ※ hero 안이 아니라 형제 요소 (아래 주석 참고)
+ sec-about        소개 카피 + 주요 강점 4카드
+ sec-skills       Web Skills / Design Tools
+ sec-projects     대표작 슬라이더 + See More (→ project/list.html)
+ sec-history      탭 필터 + 타임라인
+ sec-contact      말풍선 연락처 + 채팅 입력창 CTA
+ resume-toast     이력서 보러가기 (스크롤 멈춤 시 하단 노출)
+ site-footer      푸터
+---------------------------------------------------------------------
+ 파일 구성
+ css/style.css   전체 스타일 (섹션별 주석 [sec-...] 로 구분)
+ js/main.js      섹션별 IIFE + 프로젝트 데이터(PROJECTS)
+ assets/sprites  캐릭터 스프라이트  |  assets/logos 로고  |  assets/projects/{id}.webp 썸네일 교체
+=====================================================================
+-->
+<!-- [SECTION:site-header] 페이지 이동형 헤더 (모든 HTML 에 동일하게 복사) -->
+<header id="site-header" class="site-header" data-section="site-header">
+  <div class="page">
+    <a href="index.html" class="site-header__logo">SURRIYOUNG</a>
+    <nav class="site-header__nav" aria-label="상단 메뉴">
+      <a href="index.html" aria-current="page">HOME</a>
+      <a href="project/list.html">PROJECTS</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page" id="page-wrap">
+<!-- .page 는 sticky 메뉴바의 부모(전체 페이지 높이) 역할 -->
+
+  <main id="main" class="main">
+
+    <!-- ================================================================
+         [SECTION:sec-hero]  말풍선 인사 + 책상 앞 픽셀 캐릭터
+         ================================================================ -->
+    <section id="sec-hero" class="hero" data-section="sec-hero" aria-label="소개 인사">
+      <div class="hero__inner grid-2">
+
+        <div class="hero__bubbles" data-block="hero-bubbles">
+          <div class="ph hero__avatar" data-asset="assets/sprites/avatar-mini.png">미니 아바타</div>
+          <ul class="hero__bubble-list">
+            <li class="bubble">안녕하세요. 😊</li>
+            <li class="bubble">웹 퍼블리셔 최수영입니다 💻</li>
+            <li class="bubble">제 포트폴리오에 방문해주셔서 감사합니다 ✨</li>
+            <li class="bubble">제가 만든 프로젝트들을 둘러보세요. 👀</li>
+          </ul>
+        </div>
+
+        <div class="hero__character" data-block="hero-character">
+          <!-- 레이어 분리 (패럴랙스/시선추적 대상) -->
+          <div class="ph hero__layer hero__layer--desk"      data-asset="assets/sprites/desk.png">책상·소품 레이어</div>
+          <div class="ph hero__layer hero__layer--character" data-asset="assets/sprites/character-desk.png">캐릭터 스프라이트 (idle + 9방향 시선)</div>
+          <div class="ph hero__layer hero__layer--emote"     data-asset="assets/sprites/emote-code.png">&lt;/&gt;</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================
+         [SECTION:sec-menubar]  sticky 메뉴바
+         hero 의 자식이 아니라 형제로 둠 → 부모(.page)가 끝날 때까지 sticky 유지
+         (시각적으로 hero 하단에 걸치도록 margin-top 음수값 적용 예정)
+         ================================================================ -->
+    <nav id="sec-menubar" class="menubar" data-section="sec-menubar" aria-label="섹션 메뉴">
+      <ul class="menubar__list">
+        <li><a href="#sec-about">ABOUT</a></li>
+        <li><a href="#sec-skills">SKILLS</a></li>
+        <li><a href="#sec-projects">PROJECTS</a></li>
+        <li><a href="#sec-history">HISTORY</a></li>
+        <li><a href="#sec-contact">CONTACT</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================================================================
+         [SECTION:sec-about]  소개 카피 + 주요 강점 4카드
+         ================================================================ -->
+    <section id="sec-about" class="about" data-section="sec-about" aria-labelledby="about-title">
+      <h2 id="about-title" class="about__title">ABOUT</h2>
+
+      <div class="about__intro" data-block="about-intro">
+        <p class="bubble">디자인부터 프론트까지,<br>감각과 코드를 잇는<br>최수영입니다.</p>
+        <p class="bubble">사용자 경험을 고려한 UI/UX와 섬세한 퍼블리싱을 기반으로, JavaScript, React, Flutter를 활용해 직관적이고 생동감 있는 인터페이스를 구현하는 사용자 중심의 프론트를 고민하는 개발자를 지향합니다.</p>
+      </div>
+
+      <div class="about__strengths" data-block="about-strengths">
+        <h3 class="about__sub">주요 강점</h3>
+        <p class="about__sub-desc">디자인부터 코드, 그리고 영상까지 사용자 경험을 완성하는 올인원 퍼블리셔입니다.</p>
+        <ul class="about__cards grid-2">
+          <li class="card about__card" data-card="strength-design">
+            <span class="ph about__icon" data-asset="assets/icons/palette.png">아이콘</span>
+            <h4>디자인 및 퍼블리싱</h4>
+            <p class="about__summary">Photoshop·Illustrator·Figma 활용, UI/UX 디자인부터 최적화된 코드까지</p>
+          </li>
+          <li class="card about__card" data-card="strength-front">
+            <span class="ph about__icon" data-asset="assets/icons/code.png">아이콘</span>
+            <h4>프론트엔드 기술</h4>
+            <p class="about__summary">Flutter·React 개발 경험, 재사용 가능한 컴포넌트 설계</p>
+          </li>
+          <li class="card about__card" data-card="strength-collab">
+            <span class="ph about__icon" data-asset="assets/icons/chat.png">아이콘</span>
+            <h4>커뮤니케이션 및 협업</h4>
+            <p class="about__summary">Git·Slack·Notion 협업, 기획·디자인·개발 부서와의 원활한 소통</p>
+          </li>
+          <li class="card about__card" data-card="strength-webbuilder">
+            <span class="ph about__icon" data-asset="assets/icons/block.png">아이콘</span>
+            <h4>다양한 웹빌더 경험</h4>
+            <p class="about__summary">그누보드·카페24·아임웹·퍼스트몰 퍼블리싱 및 유지보수</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         [SECTION:sec-skills]  Web Skills / Design Tools
+         ================================================================ -->
+    <section id="sec-skills" class="skills" data-section="sec-skills" aria-labelledby="skills-title">
+      <h2 id="skills-title" class="skills__title">SKILLS</h2>
+
+      <div class="skills__cards grid-2">
+
+        <article class="card skills__card" data-block="skills-web">
+          <h3>Web Skills</h3>
+          <div class="skills__group" data-level="confident">
+            <h4>가장 자신 있어요</h4>
+            <ul class="row"><li class="chip">HTML</li><li class="chip">CSS</li><li class="chip">JavaScript</li><li class="chip">jQuery</li><li class="chip">Swiper</li><li class="chip">AOS</li></ul>
+          </div>
+          <div class="skills__group" data-level="growing">
+            <h4>꾸준히 성장 중이에요</h4>
+            <ul class="row"><li class="chip">Vite</li><li class="chip">Flutter</li><li class="chip">React</li><li class="chip">GSAP</li></ul>
+          </div>
+          <div class="skills__group" data-level="used">
+            <h4>다뤄본 서비스예요</h4>
+            <ul class="row"><li class="chip">그누보드5</li><li class="chip">카페24</li><li class="chip">아임웹</li><li class="chip">퍼스트몰</li></ul>
+          </div>
+        </article>
+
+        <article class="card skills__card" data-block="skills-design">
+          <h3>Design Tools</h3>
+          <div class="skills__group" data-level="confident">
+            <h4>자유롭게 활용해요</h4>
+            <ul class="row"><li class="chip">Figma</li><li class="chip">Photoshop</li><li class="chip">Illustrator</li><li class="chip">XD</li></ul>
+          </div>
+          <div class="skills__group" data-level="able">
+            <h4>다룰 수 있어요</h4>
+            <ul class="row"><li class="chip">Zeplin</li><li class="chip">Premiere Pro</li><li class="chip">After Effects</li><li class="chip">VLLO</li></ul>
+          </div>
+          <div class="skills__group" data-level="learning">
+            <h4>배워가고 있어요</h4>
+            <ul class="row"><li class="chip">Stitch</li></ul>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ================================================================
+         [SECTION:sec-projects]  대표작 슬라이더 + 전체 그리드
+         ================================================================ -->
+    <section id="sec-projects" class="projects" data-section="sec-projects" aria-labelledby="projects-title">
+      <div class="row row--between">
+        <h2 id="projects-title" class="projects__title">PROJECTS</h2>
+        <div class="projects__arrows" data-block="projects-arrows">
+          <button type="button" class="projects__prev" aria-label="이전">‹</button>
+          <button type="button" class="projects__next" aria-label="다음">›</button>
+        </div>
+      </div>
+
+      <!-- 대표작 슬라이더 (data/projects.json 의 featured 순서) -->
+      <div class="projects__slider swiper" data-block="projects-slider">
+        <ul class="swiper-wrapper" id="featured-list"><!-- data/projects.json 의 featured 순서대로 JS가 채움 --></ul>
+      </div>
+
+      <div class="projects__more row" data-block="projects-more">
+        <a class="projects__more-btn" href="project/list.html">See More +</a>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         [SECTION:sec-history]  탭 필터 + 타임라인
+         ================================================================ -->
+    <section id="sec-history" class="history" data-section="sec-history" aria-labelledby="history-title">
+      <div class="row row--between">
+        <h2 id="history-title" class="history__title">HISTORY</h2>
+        <div class="history__tabs row" role="tablist" aria-label="이력 필터" data-block="history-tabs">
+          <button type="button" role="tab" aria-selected="true"  data-filter="all">전체</button>
+          <button type="button" role="tab" aria-selected="false" data-filter="work">업무경험</button>
+          <button type="button" role="tab" aria-selected="false" data-filter="study">학습이력</button>
+          <button type="button" role="tab" aria-selected="false" data-filter="license">취득자격</button>
+        </div>
+      </div>
+
+      <p class="history__summary" data-block="history-summary">총 <span class="history__total">(자동 계산)</span></p>
+
+      <div class="history__timeline" data-block="history-timeline">
+        <span class="history__progress" aria-hidden="true"></span>
+        <ol class="history__list">
+
+          <li class="history__item" data-group="work" data-current="true">
+            <span class="ph history__logo" data-asset="assets/logos/webprim.png">▣</span>
+            <div class="history__body">
+              <time class="history__period">2025.07 - 현재</time>
+              <h3 class="history__org">웹프림</h3>
+              <p class="history__desc">UI/UX 디자인, 웹 퍼블리싱, 웹앱 개발(Flutter)</p>
+            </div>
+          </li>
+          <li class="history__item" data-group="work">
+            <span class="ph history__logo" data-asset="assets/logos/younglong-marketing.png">▣</span>
+            <div class="history__body">
+              <time class="history__period">2025.05 - 2025.07</time>
+              <h3 class="history__org">영롱한마케팅</h3>
+              <p class="history__desc">UI/UX 디자인, 웹 퍼블리싱</p>
+              <p class="history__reason"><span class="chip">이직사유</span> 사업 부문 통합 및 조직 개편에 따른 소속 전환</p>
+            </div>
+          </li>
+          <li class="history__item" data-group="work">
+            <span class="ph history__logo" data-asset="assets/logos/hanmec-ips.png">▣</span>
+            <div class="history__body">
+              <time class="history__period">2025.03 - 2025.05</time>
+              <h3 class="history__org">한맥IPS</h3>
+              <p class="history__desc">웹 퍼블리싱, 리액트 프론트앤드 개발</p>
+              <p class="history__reason"><span class="chip">이직사유</span> 프론트엔드 구축 및 고도화 프로젝트 종료</p>
+            </div>
+          </li>
+          <li class="history__item" data-group="study">
+            <span class="ph history__logo" data-asset="assets/logos/study-openapi.png">▣</span>
+            <div class="history__body">
+              <time class="history__period">2024.12 - 2025.03</time>
+              <h3 class="history__org">Open API를 활용한 스마트 웹 &amp; 앱 콘텐츠실무개발자 양성과정</h3>
+              <p class="history__desc">프론트엔드 기술 (JavaScript, TypeScript, React) 학습</p>
+            </div>
+          </li>
+          <li class="history__item" data-group="work">
+            <span class="ph history__logo" data-asset="assets/logos/flash21.png">▣</span>
+            <div class="history__body">
+              <time class="history__period">2023.09 - 2024.10</time>
+              <h3 class="history__org">플래시21</h3>
+              <p class="history__desc">웹 퍼블리싱, 플랫폼 앱 개발(Flutter)</p>
+              <p class="history__reason"><span class="chip">이직사유</span> 직무 전문성 확장을 위한 퇴사</p>
+            </div>
+          </li>
+          <li class="history__item" data-group="license">
+            <span class="ph history__logo" data-asset="assets/logos/qnet.png">▣</span>
+            <div class="history__body">
+              <time class="history__period">2023.09</time>
+              <h3 class="history__org">웹디자인기능사</h3>
+              <p class="history__desc">UI 구성 및 시안 제작 능력 검정</p>
+            </div>
+          </li>
+          <li class="history__item" data-group="license">
+            <span class="ph history__logo" data-asset="assets/logos/qnet.png">▣</span>
+            <div class="history__body">
+              <time class="history__period">2023.07</time>
+              <h3 class="history__org">컴퓨터그래픽스운용기능사</h3>
+              <p class="history__desc">그래픽 편집 및 출력 실무 능력 검정</p>
+            </div>
+          </li>
+          <li class="history__item" data-group="study">
+            <span class="ph history__logo" data-asset="assets/logos/study-uiux.png">▣</span>
+            <div class="history__body">
+              <time class="history__period">2023.03 - 2023.08</time>
+              <h3 class="history__org">반응형 웹디자인(UIUX) 실무 양성과정</h3>
+              <p class="history__desc">퍼블리셔 기술 (포토샵, 일러스트, 피그마, HTML, CSS, jQuery) 학습</p>
+            </div>
+          </li>
+          <li class="history__item" data-group="license">
+            <span class="ph history__logo" data-asset="assets/logos/gtq.png">▣</span>
+            <div class="history__body">
+              <time class="history__period">2023.03</time>
+              <h3 class="history__org">그래픽기술자격(GTQ) 1급</h3>
+              <p class="history__desc">포토샵 활용 능력 검정</p>
+            </div>
+          </li>
+          <li class="history__item" data-group="study">
+            <span class="ph history__logo" data-asset="assets/logos/catholic-univ.png">▣</span>
+            <div class="history__body">
+              <time class="history__period">2020.03 - 2023.02</time>
+              <h3 class="history__org">가톨릭대학교 공간디자인소비자학과·미디어기술콘텐츠학과</h3>
+              <p class="history__desc">소비자학, 콘텐츠 제작과 관련된 기술 및 이론 학습</p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         [SECTION:sec-contact]  말풍선 연락처 + 채팅 입력창 CTA
+         ================================================================ -->
+    <section id="sec-contact" class="contact" data-section="sec-contact" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="contact__title">CONTACT</h2>
+
+      <div class="contact__bubbles" data-block="contact-bubbles">
+        <ul>
+          <li class="bubble contact__bubble">NAME: 최수영</li>
+          <li class="bubble contact__bubble">ROLE: Web Publisher &amp; Frontend Developer</li>
+          <li class="bubble contact__bubble">LOCATION: 대구광역시</li>
+          <li class="bubble contact__bubble">EMAIL: (기존 사이트와 동일한 이메일)</li>
+          <li class="bubble contact__bubble">궁금한 점은 언제든 연락주세요 📩</li>
+        </ul>
+        <div class="ph contact__avatar" data-asset="assets/sprites/avatar-mini.png">미니 캐릭터</div>
+      </div>
+
+      <div class="contact__cta" data-block="contact-cta">
+        <a href="mailto:" class="contact__input">
+          <span class="contact__plus" aria-hidden="true">+</span>
+          <span class="contact__placeholder">함께할 프로젝트를 기다리고 있습니다.</span>
+          <span class="contact__send" aria-label="메일 보내기">↑</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+</div><!-- /#page-wrap -->
+
+
+
+<aside id="resume-toast" class="resume-toast" data-section="resume-toast" aria-label="이력서 바로가기" aria-hidden="true">
+  <div class="ph resume-toast__avatar" data-asset="assets/sprites/character-suit.png">정장 캐릭터</div>
+  <div><p class="resume-toast__copy">귀사의 발전은<br>저의 발전입니다.</p>
+  <a class="resume-toast__link" href="assets/resume/choisuyoung-resume.pdf" download="최수영_이력서.pdf">이력서 다운로드 ⬇</a></div>
+  <button type="button" class="resume-toast__close" aria-label="닫기">✕</button>
+</aside>
+
+<!-- [SECTION:site-footer] -->
+<footer id="site-footer" class="site-footer" data-section="site-footer">
+  <div class="page"><small>© 2026 SURRIYOUNG. All rights reserved.</small></div>
+</footer>
+
+<script src="js/common.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>
